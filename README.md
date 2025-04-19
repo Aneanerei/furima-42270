@@ -48,7 +48,7 @@
 ## shipping_addresses  テーブル（発送先情報）
 | Column               | Type       | Options   | Constraints         |
 |----------------------|------------|-----------|---------------------|
-| purchases            |references型|null: false| foreign_key: true   |
+| purchase             |references型|null: false| foreign_key: true   |
 | postal_code          | string型   |null: false|                     |
 | prefecture_id        | integer型  |null: false|                     |
 | city                 | string型   |null: false|                     |
