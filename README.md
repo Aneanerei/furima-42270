@@ -1,15 +1,15 @@
 ## items  テーブル（商品情報）
-| Column             | Type      | Options     | Constraints         |
-| ------------------ | --------- | ----------- | ------------------- |
-| name               | string型  | null: false | ------------------- |
-| description        | text型    | null: false | ------------------- |
-| category           | string型  | null: false | ------------------- |
-| condition          | string型  | null: false | ------------------- |
-| shipping_fee_payer | string型  | null: false | ------------------- |
-| shipping_origin    | string型  | null: false | ------------------- |
-| shipping_schedule  | string型  | null: false | ------------------- |
-| price              | integer型 | null: false | check: 'price >= 0' |
-| user_id            | integer型 | null: false | foreign_key: true  |
+| Column                | Type      | Options     | Constraints         |
+| ----------------------| --------- | ----------- | ------------------- |
+| name                  | string型  | null: false |                     |
+| description           | text型    | null: false |                     |
+| category_id           | integer型 | null: false |                     |
+| condition_id          | integer型 | null: false |                     |
+| shipping_fee_payer_id | integer型 | null: false |                     |
+| prefecture_id         | integer型 | null: false |                     |
+| shipping_schedule_id  | integer型 | null: false |                     |
+| price                 | integer型 | null: false | check: 'price >= 0' |
+| user                  | references| null: false | foreign_key: true  |
 
 ### Association
 - belongs_to :user
@@ -34,10 +34,10 @@
 
 
 ## purchases  テーブル（購入記録）
-| Column               | Type      | Options   | Constraints                    |
-|----------------------|-----------|-----------|--------------------------------|
-| user_id              | integer型 |null: false| foreign_key: true              |
-| item_id              | integer型 |null: false| foreign_key: true, unique:true |
+| Column               | Type       | Options   | Constraints           |
+|----------------------|------------|-----------|-----------------------|
+| user                 |references型|null: false| foreign_key: true     |
+| item                 |references型|null: false| foreign_key: true     |
 
 ### Association
 - belongs_to :user
@@ -46,15 +46,15 @@
 
 
 ## shipping_addresses  テーブル（発送先情報）
-| Column               | Type      | Options   | Constraints        |
-|----------------------|-----------|-----------|---------------------|
-| user_id              | integer型 |null: false| foreign_key: true   |
-| postal_code          | string型  |null: false|                     |
-| prefecture           | string型  |null: false|                     |
-| city                 | string型  |null: false|                     |
-| address_line1        | string型  |null: false|                     |
-| address_line2        | string型  |           |                     |
-| phone_number         | string型  |null: false|                     |
+| Column               | Type       | Options   | Constraints         |
+|----------------------|------------|-----------|---------------------|
+| purchases            |references型|null: false| foreign_key: true   |
+| postal_code          | string型   |null: false|                     |
+| prefecture_id        | integer型  |null: false|                     |
+| city                 | string型   |null: false|                     |
+| street_address       | string型   |null: false|                     |
+| building_name        | string型   |           |                     |
+| phone_number         | string型   |null: false|                     |
 
 ### Association
 - belongs_to :purchase
