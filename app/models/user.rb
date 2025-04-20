@@ -5,18 +5,17 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, presence: true
-  # パスワードの英数字混合（Deviseのvalidatableに上書き）
   validates :password,
-            format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/, message: 'is invalid. Include both letters and numbers' }, if: :password_required?
-  # 全角の名前（ひらがな・カタカナ・漢字）
-  validates :last_name, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/, message: 'is invalid. Input full-width characters' }
+  format: { with: /\A(?=.*[a-z])(?=.*\d)[a-z\d]+\z/, message: 'is invalid. Include both letters and numbers' },
+  if: :password_required?
+  validates :last_name, presence: true, 
+           format: { with: /\A[ぁ-んァ-ヶー一-龥々]+\z/, message: 'is invalid. Input full-width characters' }
   validates :first_name, presence: true,
-                         format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/, message: 'is invalid. Input full-width characters' }
+           format: { with: /\A[ぁ-んァ-ヶー一-龥々]+\z/, message: 'is invalid. Input full-width characters' }
 
-  # カタカナの名前（フリガナ）
   validates :last_name_kana, presence: true,
-                             format: { with: /\A[ァ-ヶー－]+\z/, message: 'is invalid.Input full-width katakana characters' }
+           format: { with: /\A[ァ-ヶー－]+\z/, message: 'is invalid.Input full-width katakana characters' }
   validates :first_name_kana, presence: true,
-                              format: { with: /\A[ァ-ヶー－]+\z/, message: 'is invalid.Input full-width katakana characters' }
+           format: { with: /\A[ァ-ヶー－]+\z/, message: 'is invalid.Input full-width katakana characters' }
   validates :birth_date, presence: true
 end
