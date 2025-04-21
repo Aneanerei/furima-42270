@@ -1,15 +1,15 @@
 ## items  テーブル（商品情報）
-| Column                | Type      | Options     | Constraints         |
-| ----------------------| --------- | ----------- | ------------------- |
-| name                  | string型  | null: false |                     |
-| description           | text型    | null: false |                     |
-| category_id           | integer型 | null: false |                     |
-| condition_id          | integer型 | null: false |                     |
-| shipping_fee_payer_id | integer型 | null: false |                     |
-| prefecture_id         | integer型 | null: false |                     |
-| shipping_schedule_id  | integer型 | null: false |                     |
-| price                 | integer型 | null: false | check: 'price >= 0' |
-| user                  | references| null: false | foreign_key: true  |
+| Column                | Type        | Options     | Constraints         |
+| ----------------------| ------------| ----------- | ------------------- |
+| name                  | string型    | null: false |                     |
+| description           | text型      | null: false |                     |
+| category_id           | integer型   | null: false |                     |
+| condition_id          | integer型   | null: false |                     |
+| shipping_fee_payer_id | integer型   | null: false |                     |
+| prefecture_id         | integer型   | null: false |                     |
+| shipping_schedule_id  | integer型   | null: false |                     |
+| price                 | integer型   | null: false | check: 'price >= 0' |
+| user                  | references型| null: false | foreign_key: true  |
 
 ### Association
 - belongs_to :user
