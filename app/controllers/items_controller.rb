@@ -1,6 +1,9 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+
   def index
   end
+
   def new
     @item = Item.new
   end
@@ -15,6 +18,7 @@ class ItemsController < ApplicationController
   end
 
   private
+
   def item_params
     params.require(:item).permit(
       :name,
@@ -28,6 +32,4 @@ class ItemsController < ApplicationController
       :image
     ).merge(user_id: current_user.id)
   end
-
-
 end

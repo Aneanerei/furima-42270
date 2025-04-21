@@ -33,25 +33,25 @@ RSpec.describe Item, type: :model do
     it 'priceが数字以外（文字列）だと出品できない' do
       @item.price = 'あああ'
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price is not a number")
+      expect(@item.errors.full_messages).to include('Price is not a number')
     end
 
     it 'priceが300未満だと出品できない' do
       @item.price = 299
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price is not a number")
+      expect(@item.errors.full_messages).to include('Price is not a number')
     end
 
     it 'priceが9,999,999を超えると出品できない' do
       @item.price = 10_000_000
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price is not a number")
+      expect(@item.errors.full_messages).to include('Price is not a number')
     end
 
     it 'imageが添付されていないと出品できない' do
       @item.image = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Image must be uploaded")
+      expect(@item.errors.full_messages).to include('Image must be uploaded')
     end
 
     it 'category_idが1だと出品できない' do
@@ -82,6 +82,12 @@ RSpec.describe Item, type: :model do
       @item.shipping_schedule_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Shipping schedule can't be blank")
+    end
+
+    it 'userが紐づいていないと保存できない' do
+      @item.user = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include('User must exist')
     end
   end
 end
