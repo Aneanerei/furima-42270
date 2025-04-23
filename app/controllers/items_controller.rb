@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create,:edit]
+  before_action :set_item, only: [:edit, :show, :update]
   before_action :move_to_index, except: [:index, :show]
-  before_action :set_item, only: [:edit, :show]
-
+ 
   def index
     @items = Item.includes(:user).order(created_at: :desc)
   end
@@ -22,10 +22,11 @@ class ItemsController < ApplicationController
 
   def show
   end
+  
+  def edit
+  end
 
   def update
-    @item = Item.find(params[:id])
-  
     if @item.update(item_params) && @item.previous_changes.any?
       redirect_to item_path(@item.id)
     else
@@ -33,12 +34,20 @@ class ItemsController < ApplicationController
     end
   end
 
-  
-  def edit
-  end
+
 
   private
 
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  def move_to_index
+      unless current_user == @item.user
+      redirect_to action: :index
+      end
+  end
+  
   def item_params
     params.require(:item).permit(
       :name,
@@ -53,19 +62,8 @@ class ItemsController < ApplicationController
     ).merge(user_id: current_user.id)
   end
 
-  def move_to_index
-    if params[:id]
-      @item = Item.find(params[:id]) 
-      unless user_signed_in? && current_user == @item.user
-        redirect_to action: :index
-      end
-    else
-      unless user_signed_in?
-        redirect_to action: :index
-      end
-    end
-  end
+ 
+
+ 
+
 end
-  def set_item
-    @item = Item.find(params[:id])
-  end
