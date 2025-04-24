@@ -7,16 +7,16 @@ RSpec.describe OrderShipping, type: :model do
     @order_shipping = OrderShipping.new(
       user_id: user.id,
       item_id: item.id,
-      postal_code: "123-4567",
+      postal_code: '123-4567',
       prefecture_id: 2,
-      city: "横浜市",
-      street_address: "青山1-1",
-      building_name: "柳ビル103",
-      phone_number: "09012345678",
-      token: "tok_abcdefghijk00000000000000000"
+      city: '横浜市',
+      street_address: '青山1-1',
+      building_name: '柳ビル103',
+      phone_number: '09012345678',
+      token: 'tok_abcdefghijk00000000000000000'
     )
   end
-  
+
   describe '購入情報の保存' do
     context '内容に問題ない場合' do
       it 'すべての値が正しく入力されていれば保存できる' do
@@ -51,7 +51,7 @@ RSpec.describe OrderShipping, type: :model do
       it '郵便番号がハイフンなしでは保存できない' do
         @order_shipping.postal_code = '1234567'
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("Postal code is invalid. Enter it as follows (e.g. 123-4567)")
+        expect(@order_shipping.errors.full_messages).to include('Postal code is invalid. Enter it as follows (e.g. 123-4567)')
       end
 
       it 'prefecture_idが1だと出品できない' do
@@ -81,19 +81,19 @@ RSpec.describe OrderShipping, type: :model do
       it '電話番号が9桁以下では保存できない' do
         @order_shipping.phone_number = '090123456'
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("Phone number is too short")
+        expect(@order_shipping.errors.full_messages).to include('Phone number is too short')
       end
 
       it '電話番号が12桁以上では保存できない' do
         @order_shipping.phone_number = '090123456789'
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("Phone number is too long")
+        expect(@order_shipping.errors.full_messages).to include('Phone number is too long')
       end
 
       it '電話番号に数字以外が含まれていると保存できない' do
         @order_shipping.phone_number = '090-1234-5678'
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("Phone number is invalid. Input only number")
+        expect(@order_shipping.errors.full_messages).to include('Phone number is invalid. Input only number')
       end
 
       it 'tokenが空では登録できないこと' do
@@ -104,4 +104,3 @@ RSpec.describe OrderShipping, type: :model do
     end
   end
 end
-

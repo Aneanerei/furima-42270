@@ -22,7 +22,7 @@ class Item < ApplicationRecord
   validates :shipping_schedule_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :shipping_fee_payer_id, numericality: { other_than: 1, message: "can't be blank" }
- 
+
   def sold_out?
     purchase.present?
   end
