@@ -12,7 +12,6 @@ class OrdersController < ApplicationController
 
   def create
     @order_shipping = OrderShipping.new(order_shipping_params)
-
     if @order_shipping.valid?
       pay_item
       @order_shipping.save
