@@ -1,7 +1,7 @@
 class OrderShipping < ApplicationRecord
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :postal_code, :prefecture_id,
-                :city, :street_address, :building_name, :phone_number, :token, :purchase_id
+                :city, :street_address, :building_name, :phone_number, :token
 
   validates :user_id, presence: { message: "can't be blank" }
   validates :item_id, presence: { message: "can't be blank" }
@@ -24,7 +24,6 @@ class OrderShipping < ApplicationRecord
       street_address: street_address,
       building_name: building_name,
       phone_number: phone_number,
-      purchase_id: purchase.id
     )
   end
 end

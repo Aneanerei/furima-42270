@@ -1,9 +1,9 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
-
+  before_action :set_item, only: [:index, :create]
+ 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-    @item = Item.find(params[:item_id])
     @order_shipping = OrderShipping.new
     return unless @item.sold_out? || current_user == @item.user
 
@@ -11,9 +11,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_shipping = OrderShipping.new(order_shipping_params)
-
     if @order_shipping.valid?
       pay_item
       @order_shipping.save
@@ -41,4 +39,9 @@ class OrdersController < ApplicationController
       currency: 'jpy' # 通貨の種類（日本円）
     )
   end
+  
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
 end
