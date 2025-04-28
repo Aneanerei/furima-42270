@@ -177,6 +177,7 @@ GEM
       benchmark
       logger
     mini_mime (1.1.5)
+    mini_portile2 (2.8.8)
     minitest (5.25.5)
     msgpack (1.8.0)
     multi_json (1.15.0)
@@ -193,7 +194,8 @@ GEM
       net-protocol
     netrc (0.11.0)
     nio4r (2.7.4)
-    nokogiri (1.18.7-x86_64-linux-gnu)
+    nokogiri (1.18.8)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.27.0)
@@ -203,7 +205,6 @@ GEM
     payjp (1.1.7)
       base64
       rest-client (~> 2.0)
-    pg (1.5.9)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -375,8 +376,8 @@ DEPENDENCIES
   jbuilder
   mini_magick
   mysql2 (~> 0.5)
+  nokogiri
   payjp
-  pg
   pry-byebug
   puma (>= 5.0)
   rails (~> 7.1.0)
